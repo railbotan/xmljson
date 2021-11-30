@@ -46,5 +46,3 @@ def save_all_fields():
     news = get_all_fields(channel)
     save_news(news, "all_fields_news.json")
 
-
-save_all_fields()
