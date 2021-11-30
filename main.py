@@ -9,6 +9,12 @@ def get_channel():
     return root[0]
 
 
+def save_news(news: [], filename):
+    news_json = json.dumps(news, ensure_ascii=False).encode('utf8')
+    with open(filename, 'wb') as f:
+        f.write(news_json)
+
+
 def get_pub_date_title(channel: ET.Element):
     news = []
     for item in channel.findall("item"):
@@ -19,16 +25,26 @@ def get_pub_date_title(channel: ET.Element):
     return news
 
 
-def save_news(news: []):
-    news_json = json.dumps(news, ensure_ascii=False).encode('utf8')
-    with open("news.json", 'wb') as f:
-        f.write(news_json)
+def get_all_fields(channel: ET.Element):
+    news = []
+    for item in channel.findall('item'):
+        fields = {}
+        for field in item:
+            fields[field.tag] = field.text
+        news.append(fields)
+    return news
 
 
 def save_pub_date_title():
     channel = get_channel()
     news = get_pub_date_title(channel)
-    save_news(news)
+    save_news(news, "news.json")
 
 
-save_pub_date_title()
+def save_all_fields():
+    channel = get_channel()
+    news = get_all_fields(channel)
+    save_news(news, "all_fields_news.json")
+
+
+save_all_fields()
