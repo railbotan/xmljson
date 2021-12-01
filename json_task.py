@@ -26,7 +26,7 @@ def get_all_news(element):
 
 
 def save_to_json_file(news, name):
-    json_file = json.dumps(news, ensure_ascii=False).encode('utf8')
+    json_file = json.dumps(news, ensure_ascii=False,  sort_keys=True, indent=4).encode('utf8')
     with open(name, 'wb') as f:
         f.write(json_file)
 
