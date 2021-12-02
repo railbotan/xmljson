@@ -26,7 +26,7 @@ def get_all_news(channel):
     return all_news
 
 def save_to_json(news, filename):
-    json_file = json.dumps(news, sort_keys=True, indent=4).encode('utf8')
+    json_file = json.dumps(news, ensure_ascii=False, indent=4 ).encode('utf8')
     with open(filename, 'wb') as f:
         f.write(json_file)
 
