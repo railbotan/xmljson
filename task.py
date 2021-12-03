@@ -30,5 +30,5 @@ def save_to_json(news, filename):
     with open(filename, 'wb') as f:
         f.write(json_file)
 
-save_to_json(get_all_news(get_channel()), 'news.json')
-save_to_json(get_news(get_channel()), 'all_news.json')
+save_to_json(get_all_news(get_channel()), 'all_news.json')
+save_to_json(get_news(get_channel()), 'news.json')
