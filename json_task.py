@@ -15,11 +15,20 @@ def get_news(channel):
         news.append({'pubDate': i.find('pubDate').text,'title': i.find('title').text})
     return news
 
+def get_all_data(channel):
+    news = []
+    for i in channel.findall('item'):
+        data = {}
+        for t in i:
+            data[t.tag] = t.text
+        news.append(data)
+    return news
 
-def save_news(news):
-    news_json = json.dumps(news, ensure_ascii=False).encode('utf8')
-    with open("news.json", 'wb') as f:
+def save_news(news, filename):
+    news_json = json.dumps(news, ensure_ascii=False, indent=1).encode('utf8')
+    with open(filename, 'wb') as f:
         f.write(news_json)
 
 
-save_news(get_news(get_channel()))
+save_news(get_news(get_channel()), "news.json")
+save_news(get_all_data(get_channel()), "all_news.json")
