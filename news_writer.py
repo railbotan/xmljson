@@ -19,11 +19,24 @@ def get_date_title(channel):
     return news_list
 
 
-def write_json(news_list):
+def get_fields(channel):
+    news_list = []
+    for item in channel.findall('item'):
+        fields = {}
+        for field in item:
+            fields[field.tag] = field.text
+        news_list.append(fields)
+
+    return news_list
+
+
+def write_json(news_list, filename):
     json_file = json.dumps(news_list, ensure_ascii=False).encode('utf8')
-    with open("news.json", 'wb') as f:
+    with open(filename, 'wb') as f:
         f.write(json_file)
 
 
-news = get_date_title(get_channel())
-write_json(news)
+# news = get_date_title(get_channel())
+# write_json(news, "news.json")
+all_news = get_fields(get_channel())
+write_json(all_news, "full_news.json")
