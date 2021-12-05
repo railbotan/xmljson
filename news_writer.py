@@ -31,12 +31,12 @@ def get_fields(channel):
 
 
 def write_json(news_list, filename):
-    json_file = json.dumps(news_list, ensure_ascii=False).encode('utf8')
+    json_file = json.dumps(news_list, ensure_ascii=False, indent=4).encode('utf8')
     with open(filename, 'wb') as f:
         f.write(json_file)
 
 
-# news = get_date_title(get_channel())
-# write_json(news, "news.json")
+news = get_date_title(get_channel())
+write_json(news, "news.json")
 all_news = get_fields(get_channel())
 write_json(all_news, "full_news.json")
