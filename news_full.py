@@ -17,6 +17,5 @@ def get_news(channel):
 
 
 news = list(get_news(get_channel()))
-news_json = json.dumps(news, ensure_ascii=False).encode('utf8')
-with open("news_full.json", 'wb') as f:
-    f.write(news_json)
+with open("news_full.json", 'w', encoding="utf-8") as f:
+    json.dump(news, f, ensure_ascii=False, indent=4)
